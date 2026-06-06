@@ -26,6 +26,30 @@ def diameter_of_a_tree(root):
 
     return ans
 
+
+
+
+
+def diameter_of_tree_optimized(root):
+    if(root is None):
+        return 0, 0 # height, diameter
+    
+    left_height, left_diameter = diameter_of_tree_optimized(root.left)
+    right_height, right_diameter = diameter_of_tree_optimized(root.right)
+
+    diameter_throught_root = left_height + right_height # Option 1
+    # left_diameter - Option 2
+    # right_diameter - Option 3
+
+    ans_diameter = max(diameter_throught_root, left_diameter, right_diameter)
+
+    current_tree_height = 1 + max(left_height, right_height)
+
+    return current_tree_height, ans_diameter
+
 root1, root2, root3 = predefined_binary_tree_inputs()
 
-print(diameter_of_a_tree(root1))
+# print(diameter_of_a_tree(root1))
+
+treeHeight, treeDiameter = diameter_of_tree_optimized(root1)
+print(treeHeight,treeDiameter)
